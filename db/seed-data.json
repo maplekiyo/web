@@ -1,0 +1,950 @@
+{
+  "members": [
+    {
+      "household_no": 1,
+      "role": "会長",
+      "full_name": "高桑　博子",
+      "kana": "たかくわ　ひろこ",
+      "address": "品川区八潮5-12-69-1310",
+      "phone": "090-7738-6453",
+      "email": "happiness59_0106@docomo.ne.jp",
+      "school": null,
+      "birthday": "１月６日"
+    },
+    {
+      "household_no": 1,
+      "role": null,
+      "full_name": "高桑　大誠",
+      "kana": "たかくわ　たいせい",
+      "address": "同上",
+      "phone": "同上",
+      "email": null,
+      "school": "鈴ヶ森めばえ幼稚園",
+      "birthday": "２０１０年１１月１２日"
+    },
+    {
+      "household_no": 1,
+      "role": null,
+      "full_name": "高桑　大馳",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 2,
+      "role": "会計監査",
+      "full_name": "永原　真由美",
+      "kana": "ながはら　まゆみ",
+      "address": "品川区八潮5-12-69-512",
+      "phone": "090-9135-3171",
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 2,
+      "role": null,
+      "full_name": "永原　幸祐",
+      "kana": "ながはら　こうすけ",
+      "address": "同上",
+      "phone": "同上",
+      "email": null,
+      "school": "エトワール幼稚園",
+      "birthday": null
+    },
+    {
+      "household_no": 2,
+      "role": null,
+      "full_name": "永原　杏菜",
+      "kana": "ながはら　あんな",
+      "address": "同上",
+      "phone": "同上",
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 2,
+      "role": null,
+      "full_name": "永原　柚花",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 3,
+      "role": null,
+      "full_name": "浅倉　奈津美",
+      "kana": "あさくら　なつみ",
+      "address": "品川区勝島1-7-2-506",
+      "phone": "090-7897-8369",
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 3,
+      "role": null,
+      "full_name": "浅倉　柚華",
+      "kana": "あさくら　ゆずは",
+      "address": "同上",
+      "phone": "同上",
+      "email": null,
+      "school": "鈴ヶ森めばえ幼稚園",
+      "birthday": null
+    },
+    {
+      "household_no": 3,
+      "role": null,
+      "full_name": "浅倉　理人",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 4,
+      "role": null,
+      "full_name": "保科　希代美",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 4,
+      "role": null,
+      "full_name": "保科　優衣",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 4,
+      "role": null,
+      "full_name": "保科　創太朗",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 5,
+      "role": null,
+      "full_name": "竹内　侑子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 5,
+      "role": null,
+      "full_name": "竹内　琴羽",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 5,
+      "role": null,
+      "full_name": "竹内　昴晴",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 5,
+      "role": null,
+      "full_name": "竹内　碧唯",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 6,
+      "role": null,
+      "full_name": "武田　綾",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 6,
+      "role": null,
+      "full_name": "武田　夏花咲",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 6,
+      "role": null,
+      "full_name": "武田　桜空",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 7,
+      "role": null,
+      "full_name": "巴　香織",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 7,
+      "role": null,
+      "full_name": "巴　美琴",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 7,
+      "role": null,
+      "full_name": "巴　健信",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 7,
+      "role": null,
+      "full_name": "巴　美涼",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 8,
+      "role": null,
+      "full_name": "小林　美咲",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 8,
+      "role": null,
+      "full_name": "小林　ひなた",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 8,
+      "role": null,
+      "full_name": "小林　凛",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 8,
+      "role": null,
+      "full_name": "小林　杏",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 9,
+      "role": null,
+      "full_name": "菅原　直子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 10,
+      "role": null,
+      "full_name": "涌井　純子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 10,
+      "role": null,
+      "full_name": "涌井　航大",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 10,
+      "role": null,
+      "full_name": "涌井　千咲",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 10,
+      "role": null,
+      "full_name": "涌井　匠真",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 11,
+      "role": null,
+      "full_name": "前野　涼子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 11,
+      "role": null,
+      "full_name": "前野　琉衣",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 11,
+      "role": null,
+      "full_name": "前野　つばき",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 12,
+      "role": null,
+      "full_name": "片原　未来",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 12,
+      "role": null,
+      "full_name": "片原　えいしゅん",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 12,
+      "role": null,
+      "full_name": "片原　そうしゅん",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 13,
+      "role": null,
+      "full_name": "崎山 かおり",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 13,
+      "role": null,
+      "full_name": "崎山　やさ",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 13,
+      "role": null,
+      "full_name": "崎山　かなと",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 13,
+      "role": null,
+      "full_name": "崎山　史叶",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 13,
+      "role": null,
+      "full_name": "崎山　ももか",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 14,
+      "role": null,
+      "full_name": "福盛　彩",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 14,
+      "role": null,
+      "full_name": "福盛　春馬",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 14,
+      "role": null,
+      "full_name": "福盛　空夏",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 14,
+      "role": null,
+      "full_name": "福盛　尊",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 15,
+      "role": null,
+      "full_name": "高橋　尚子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 15,
+      "role": null,
+      "full_name": "高橋　和花",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 16,
+      "role": null,
+      "full_name": "池原",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 16,
+      "role": null,
+      "full_name": "池原　ようすけ",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 16,
+      "role": null,
+      "full_name": "池原　ももか",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 17,
+      "role": null,
+      "full_name": "秋田 沙織",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 17,
+      "role": null,
+      "full_name": "秋田　菫花",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 17,
+      "role": null,
+      "full_name": "秋田　桜咲",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 17,
+      "role": null,
+      "full_name": "秋田　悠希",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 18,
+      "role": null,
+      "full_name": "渡邊　宜子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 18,
+      "role": null,
+      "full_name": "渡邊　茉子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 18,
+      "role": null,
+      "full_name": "渡邊",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 19,
+      "role": null,
+      "full_name": "小松　のぞみ",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 20,
+      "role": null,
+      "full_name": "吉野",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 21,
+      "role": null,
+      "full_name": "佐藤　加奈葉",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 22,
+      "role": null,
+      "full_name": "久保",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "高瀬　和代",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "高瀬　悠瑠",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "高瀬　倖來",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "藤野　沙織",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "上野　弘子",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "隅谷　真帆",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "隅谷　颯翔",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "隅谷　遙麒",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "大塚",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    },
+    {
+      "household_no": 23,
+      "role": null,
+      "full_name": "片桐",
+      "kana": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "school": null,
+      "birthday": null
+    }
+  ],
+  "nicknames": [
+    {
+      "nickname": "きよみん",
+      "full_name": "保科　希代美"
+    },
+    {
+      "nickname": "かたぎり",
+      "full_name": "片桐"
+    }
+  ],
+  "sessions": [
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-04-20",
+      "activity_name": "自由製作",
+      "sort_order": 0
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-04-27",
+      "activity_name": "自由製作",
+      "sort_order": 1
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-05-11",
+      "activity_name": "2WAYアウターホルダー",
+      "sort_order": 2
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-05-25",
+      "activity_name": "自由製作",
+      "sort_order": 3
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-06-08",
+      "activity_name": null,
+      "sort_order": 4
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-06-22",
+      "activity_name": null,
+      "sort_order": 5
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-07-07",
+      "activity_name": null,
+      "sort_order": 6
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-07-14",
+      "activity_name": null,
+      "sort_order": 7
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-09-06",
+      "activity_name": null,
+      "sort_order": 8
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-09-29",
+      "activity_name": null,
+      "sort_order": 9
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-10-06",
+      "activity_name": null,
+      "sort_order": 10
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-10-27",
+      "activity_name": null,
+      "sort_order": 11
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-11-10",
+      "activity_name": null,
+      "sort_order": 12
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-12-08",
+      "activity_name": "総会",
+      "sort_order": 13
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2026-12-15",
+      "activity_name": null,
+      "sort_order": 14
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2027-01-19",
+      "activity_name": null,
+      "sort_order": 15
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2027-01-26",
+      "activity_name": null,
+      "sort_order": 16
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2027-02-09",
+      "activity_name": null,
+      "sort_order": 17
+    },
+    {
+      "fiscal_year": 2026,
+      "session_date": "2027-02-16",
+      "activity_name": null,
+      "sort_order": 18
+    }
+  ],
+  "fiscal": {
+    "fiscal_year": 2026,
+    "prior_year_balance": 18030,
+    "difference": 500,
+    "default_room_fee": 600
+  }
+}
