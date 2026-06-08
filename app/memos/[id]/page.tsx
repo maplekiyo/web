@@ -53,59 +53,62 @@ export default function MemoDetailPage() {
   }, [id]);
 
   return (
-    <main className="mx-auto w-full max-w-md flex-1 px-4 py-6">
-      <div className="mb-4 flex items-center justify-between">
-        <Link href="/memos" className="text-sm text-neutral-500">
+    <main className="mx-auto w-full max-w-xl flex-1 px-4 py-6">
+      <div className="mb-4 flex items-center gap-3">
+        <Link href="/memos" className="btn btn-ghost btn-sm -ml-2 px-2">
           ← 履歴
         </Link>
-        <h1 className="font-semibold">記帳詳細</h1>
-        <span className="w-10" />
+        <h1 className="text-lg font-bold tracking-tight">記帳詳細</h1>
       </div>
 
       {error && (
-        <p className="rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>
+        <div role="alert" className="alert alert-error py-3 text-sm">
+          <span>{error}</span>
+        </div>
       )}
 
       {memo && (
         <div className="flex flex-col gap-4">
-          <div className="rounded-xl border border-neutral-200 p-3 text-sm">
-            <div className="flex justify-between">
-              <span className="text-neutral-500">氏名</span>
-              <span className="font-medium">{memo.member_name ?? "（不明）"}</span>
-            </div>
-            <div className="mt-1 flex justify-between">
-              <span className="text-neutral-500">回</span>
-              <span>
-                {memo.session_date} {memo.activity_name ?? ""}
-              </span>
-            </div>
-            <div className="mt-1 flex justify-between">
-              <span className="text-neutral-500">合計</span>
-              <span className="font-semibold tabular-nums">
-                ¥{memo.declared_total.toLocaleString()}
-              </span>
+          <div className="card border border-base-300 bg-base-100 shadow-sm">
+            <div className="card-body gap-2 p-4 text-sm">
+              <div className="flex justify-between">
+                <span className="text-base-content/50">氏名</span>
+                <span className="font-medium">{memo.member_name ?? "（不明）"}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-base-content/50">回</span>
+                <span>
+                  {memo.session_date} {memo.activity_name ?? ""}
+                </span>
+              </div>
+              <div className="flex justify-between border-t border-base-200 pt-2">
+                <span className="text-base-content/50">合計</span>
+                <span className="font-semibold tabular-nums">
+                  ¥{memo.declared_total.toLocaleString()}
+                </span>
+              </div>
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-xl border border-neutral-200">
-            <table className="w-full text-sm">
-              <thead className="bg-neutral-50 text-left text-xs text-neutral-500">
+          <div className="overflow-x-auto rounded-box border border-base-300 bg-base-100">
+            <table className="table table-sm">
+              <thead>
                 <tr>
-                  <th className="p-2">パーツ</th>
-                  <th className="p-2 text-right">単価</th>
-                  <th className="p-2 text-right">数量</th>
-                  <th className="p-2 text-right">金額</th>
-                  <th className="p-2">備考</th>
+                  <th>パーツ</th>
+                  <th className="text-right">単価</th>
+                  <th className="text-right">数量</th>
+                  <th className="text-right">金額</th>
+                  <th>備考</th>
                 </tr>
               </thead>
               <tbody>
                 {memo.lines.map((l, i) => (
-                  <tr key={i} className="border-t border-neutral-100">
-                    <td className="p-2">{l.part_name}</td>
-                    <td className="p-2 text-right tabular-nums">{l.unit_price}</td>
-                    <td className="p-2 text-right tabular-nums">{l.quantity}</td>
-                    <td className="p-2 text-right tabular-nums">{l.amount}</td>
-                    <td className="p-2">{NOTE_LABEL[l.note] ?? l.note}</td>
+                  <tr key={i}>
+                    <td>{l.part_name}</td>
+                    <td className="text-right tabular-nums">{l.unit_price}</td>
+                    <td className="text-right tabular-nums">{l.quantity}</td>
+                    <td className="text-right tabular-nums">{l.amount}</td>
+                    <td>{NOTE_LABEL[l.note] ?? l.note}</td>
                   </tr>
                 ))}
               </tbody>
@@ -114,12 +117,12 @@ export default function MemoDetailPage() {
 
           {memo.has_image && (
             <div>
-              <span className="mb-1 block text-sm text-neutral-500">元のメモ画像</span>
+              <span className="mb-1 block text-sm text-base-content/50">元のメモ画像</span>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/api/memos/${memo.id}/image`}
                 alt="memo"
-                className="w-full rounded-xl border border-neutral-200"
+                className="w-full rounded-box border border-base-300"
               />
             </div>
           )}

@@ -61,18 +61,18 @@ export default function MembersPage() {
   }, [members, query]);
 
   return (
-    <main className="mx-auto w-full max-w-md flex-1 px-4 py-6">
-      <div className="mb-4 flex items-center justify-between">
-        <Link href="/" className="text-sm text-neutral-500">
+    <main className="mx-auto w-full max-w-xl flex-1 px-4 py-6">
+      <div className="mb-4 flex items-center gap-3">
+        <Link href="/" className="btn btn-ghost btn-sm -ml-2 px-2">
           ← 戻る
         </Link>
-        <h1 className="font-semibold">会員管理</h1>
+        <h1 className="text-lg font-bold tracking-tight">会員管理</h1>
         <button
           onClick={() => {
             setError(null);
             setEditing({ ...EMPTY });
           }}
-          className="rounded-lg bg-neutral-900 px-3 py-1 text-sm text-white dark:bg-white dark:text-black"
+          className="btn btn-primary btn-sm ml-auto"
         >
           ＋追加
         </button>
@@ -82,19 +82,22 @@ export default function MembersPage() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="氏名・なまえ・ニックネームで検索"
-        className="mb-4 w-full rounded-lg border border-neutral-300 p-2 text-sm"
+        className="input input-bordered mb-4 w-full"
       />
 
-      {loading && <p className="text-sm text-neutral-500">読み込み中…</p>}
+      {loading && (
+        <div className="flex items-center gap-2 text-sm text-base-content/50">
+          <span className="loading loading-spinner loading-sm" />
+          読み込み中…
+        </div>
+      )}
 
       <ul className="flex flex-col gap-2">
         {filtered.map((m) => (
           <li
             key={m.id}
-            className={`rounded-xl border p-3 ${
-              m.active
-                ? "border-neutral-200"
-                : "border-neutral-200 bg-neutral-50 opacity-60"
+            className={`card border bg-base-100 shadow-sm ${
+              m.active ? "border-base-300" : "border-base-300 bg-base-200/60 opacity-60"
             }`}
           >
             <button
@@ -102,27 +105,23 @@ export default function MembersPage() {
                 setError(null);
                 setEditing(m);
               }}
-              className="flex w-full items-center justify-between text-left"
+              className="flex w-full items-center justify-between p-3 text-left"
             >
               <span>
                 <span className="font-medium">{m.full_name}</span>
-                {m.role && (
-                  <span className="ml-2 rounded bg-neutral-100 px-1.5 py-0.5 text-xs text-neutral-600">
-                    {m.role}
-                  </span>
-                )}
-                {m.kana && (
-                  <span className="block text-xs text-neutral-400">{m.kana}</span>
-                )}
+                {m.role && <span className="badge badge-ghost badge-sm ml-2">{m.role}</span>}
+                {m.kana && <span className="block text-xs text-base-content/40">{m.kana}</span>}
                 {m.nicknames.length > 0 && (
-                  <span className="block text-xs text-blue-600">
-                    {m.nicknames.map((n) => `「${n}」`).join(" ")}
+                  <span className="mt-1 flex flex-wrap gap-1">
+                    {m.nicknames.map((n) => (
+                      <span key={n} className="badge badge-info badge-sm badge-outline">
+                        {n}
+                      </span>
+                    ))}
                   </span>
                 )}
               </span>
-              <span className="text-xs text-neutral-400">
-                {m.household_no ?? "—"}
-              </span>
+              <span className="text-xs text-base-content/40">{m.household_no ?? "—"}</span>
             </button>
           </li>
         ))}
@@ -174,14 +173,11 @@ function MemberEditor({
     setBusy(true);
     onError(null);
     try {
-      const res = await fetch(
-        isNew ? "/api/members" : `/api/members/${draft.id}`,
-        {
-          method: isNew ? "POST" : "PATCH",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-        },
-      );
+      const res = await fetch(isNew ? "/api/members" : `/api/members/${draft.id}`, {
+        method: isNew ? "POST" : "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
       const json = await res.json();
       if (!res.ok) throw new Error(json.error ?? "保存に失敗しました");
       onSaved();
@@ -233,22 +229,24 @@ function MemberEditor({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40"
+      className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 backdrop-blur-sm sm:items-center"
       onClick={onClose}
     >
       <div
-        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-t-2xl bg-white p-5 dark:bg-neutral-900"
+        className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-t-2xl border border-base-300 bg-base-100 p-5 shadow-xl sm:rounded-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="font-semibold">{isNew ? "会員を追加" : "会員を編集"}</h2>
-          <button onClick={onClose} className="text-sm text-neutral-500">
-            閉じる
+          <h2 className="text-lg font-bold">{isNew ? "会員を追加" : "会員を編集"}</h2>
+          <button onClick={onClose} className="btn btn-ghost btn-sm btn-circle">
+            ✕
           </button>
         </div>
 
         {error && (
-          <p className="mb-3 rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>
+          <div role="alert" className="alert alert-error mb-3 py-2 text-sm">
+            <span>{error}</span>
+          </div>
         )}
 
         <div className="grid grid-cols-2 gap-3">
@@ -270,50 +268,48 @@ function MemberEditor({
           <MemberField label="住所" value={form.address ?? ""} onChange={(v) => set("address", v)} />
         </div>
 
-        <label className="mt-3 flex items-center gap-2 text-sm">
+        <label className="mt-3 flex cursor-pointer items-center gap-2 text-sm">
           <input
             type="checkbox"
             checked={form.active ?? true}
             onChange={(e) => set("active", e.target.checked)}
+            className="checkbox checkbox-sm checkbox-primary"
           />
           在籍中（オフで非表示・記帳対象外）
         </label>
 
         {/* Nicknames — only for saved members */}
         <div className="mt-4">
-          <span className="mb-1 block text-sm text-neutral-500">
+          <span className="mb-1 block text-sm text-base-content/60">
             ニックネーム（メモの氏名照合に使用）
           </span>
           {isNew ? (
-            <p className="text-xs text-neutral-400">
+            <p className="text-xs text-base-content/40">
               先に保存すると、ニックネームを追加できます。
             </p>
           ) : (
             <>
               <div className="mb-2 flex flex-wrap gap-2">
                 {(form.nicknames ?? []).map((n) => (
-                  <span
-                    key={n}
-                    className="flex items-center gap-1 rounded-full bg-blue-50 px-2 py-1 text-xs text-blue-700"
-                  >
+                  <span key={n} className="badge badge-info badge-outline gap-1 py-3">
                     {n}
-                    <button onClick={() => removeNick(n)} className="text-blue-400">
+                    <button onClick={() => removeNick(n)} className="text-info/70 hover:text-info">
                       ✕
                     </button>
                   </span>
                 ))}
               </div>
-              <div className="flex gap-2">
+              <div className="join w-full">
                 <input
                   value={nick}
                   onChange={(e) => setNick(e.target.value)}
                   placeholder="きよみん など"
-                  className="flex-1 rounded-lg border border-neutral-300 p-2 text-sm"
+                  className="input input-bordered join-item flex-1"
                 />
                 <button
                   onClick={addNick}
                   disabled={busy || !nick.trim()}
-                  className="rounded-lg border px-3 text-sm disabled:opacity-40"
+                  className="btn btn-outline join-item"
                 >
                   追加
                 </button>
@@ -322,11 +318,8 @@ function MemberEditor({
           )}
         </div>
 
-        <button
-          onClick={save}
-          disabled={busy}
-          className="mt-5 w-full rounded-xl bg-neutral-900 py-3 font-semibold text-white disabled:opacity-40 dark:bg-white dark:text-black"
-        >
+        <button onClick={save} disabled={busy} className="btn btn-primary btn-block mt-5">
+          {busy && <span className="loading loading-spinner loading-sm" />}
           {busy ? "保存中…" : "保存"}
         </button>
       </div>
@@ -346,13 +339,13 @@ function MemberField({
   type?: string;
 }) {
   return (
-    <label className="text-sm">
-      <span className="mb-1 block text-neutral-500">{label}</span>
+    <label className="form-control text-sm">
+      <span className="mb-1 block text-base-content/60">{label}</span>
       <input
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full rounded-lg border border-neutral-300 p-2"
+        className="input input-bordered w-full"
       />
     </label>
   );

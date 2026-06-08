@@ -60,21 +60,20 @@ export default function SettingsPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-md flex-1 px-4 py-6">
-      <div className="mb-4 flex items-center justify-between">
-        <Link href="/" className="text-sm text-neutral-500">
+    <main className="mx-auto w-full max-w-xl flex-1 px-4 py-6">
+      <div className="mb-4 flex items-center gap-3">
+        <Link href="/" className="btn btn-ghost btn-sm -ml-2 px-2">
           ← 戻る
         </Link>
-        <h1 className="font-semibold">年度設定</h1>
-        <span className="w-10" />
+        <h1 className="text-lg font-bold tracking-tight">年度設定</h1>
       </div>
 
-      <label className="mb-5 block text-sm">
-        <span className="mb-1 block text-neutral-500">年度</span>
+      <label className="form-control mb-5">
+        <span className="mb-1 block text-sm font-medium text-base-content/60">年度</span>
         <select
           value={year}
           onChange={(e) => setYear(Number(e.target.value))}
-          className="w-full rounded-lg border border-neutral-300 p-2"
+          className="select select-bordered w-full"
         >
           {[2025, 2026, 2027].map((y) => (
             <option key={y} value={y}>
@@ -85,38 +84,43 @@ export default function SettingsPage() {
       </label>
 
       {error && (
-        <p className="mb-3 rounded-lg bg-red-50 p-2 text-sm text-red-700">{error}</p>
+        <div role="alert" className="alert alert-error mb-3 py-3 text-sm">
+          <span>{error}</span>
+        </div>
       )}
 
       {form && (
-        <div className="flex flex-col gap-4">
-          <Num
-            label="前年度残高"
-            hint="前年度から繰り越す残高（会計シート C78）"
-            value={form.prior_year_balance}
-            onChange={(v) => set("prior_year_balance", v)}
-          />
-          <Num
-            label="差額（備蓄金）"
-            hint="アトリエムの備蓄金（会計シート 差額）"
-            value={form.difference}
-            onChange={(v) => set("difference", v)}
-          />
-          <Num
-            label="部屋代（既定）"
-            hint="各回の部屋代の既定値"
-            value={form.default_room_fee}
-            onChange={(v) => set("default_room_fee", v)}
-          />
+        <div className="card border border-base-300 bg-base-100 shadow-sm">
+          <div className="card-body gap-4">
+            <Num
+              label="前年度残高"
+              hint="前年度から繰り越す残高（会計シート C78）"
+              value={form.prior_year_balance}
+              onChange={(v) => set("prior_year_balance", v)}
+            />
+            <Num
+              label="差額（備蓄金）"
+              hint="アトリエムの備蓄金（会計シート 差額）"
+              value={form.difference}
+              onChange={(v) => set("difference", v)}
+            />
+            <Num
+              label="部屋代（既定）"
+              hint="各回の部屋代の既定値"
+              value={form.default_room_fee}
+              onChange={(v) => set("default_room_fee", v)}
+            />
 
-          <button
-            onClick={save}
-            disabled={busy}
-            className="mt-2 rounded-xl bg-neutral-900 py-3 font-semibold text-white disabled:opacity-40 dark:bg-white dark:text-black"
-          >
-            {busy ? "保存中…" : "保存"}
-          </button>
-          {msg && <p className="text-center text-sm text-green-600">{msg}</p>}
+            <button onClick={save} disabled={busy} className="btn btn-primary btn-block mt-1">
+              {busy && <span className="loading loading-spinner loading-sm" />}
+              {busy ? "保存中…" : "保存"}
+            </button>
+            {msg && (
+              <div role="alert" className="alert alert-success py-2 text-sm">
+                <span>{msg}</span>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </main>
@@ -135,14 +139,14 @@ function Num({
   onChange: (v: number) => void;
 }) {
   return (
-    <label className="text-sm">
+    <label className="form-control text-sm">
       <span className="block font-medium">{label}</span>
-      <span className="mb-1 block text-xs text-neutral-400">{hint}</span>
+      <span className="mb-1 block text-xs text-base-content/50">{hint}</span>
       <input
         type="number"
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full rounded-lg border border-neutral-300 p-2 text-right tabular-nums"
+        className="input input-bordered w-full text-right tabular-nums"
       />
     </label>
   );

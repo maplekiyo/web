@@ -94,20 +94,19 @@ export default function LedgerPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-md flex-1 px-4 py-6">
-      <div className="mb-4 flex items-center justify-between">
-        <Link href="/" className="text-sm text-neutral-500">
+    <main className="mx-auto w-full max-w-xl flex-1 px-4 py-6">
+      <div className="mb-4 flex items-center gap-3">
+        <Link href="/" className="btn btn-ghost btn-sm -ml-2 px-2">
           ← 戻る
         </Link>
-        <h1 className="font-semibold">会計台帳</h1>
-        <span className="w-10" />
+        <h1 className="text-lg font-bold tracking-tight">会計台帳</h1>
       </div>
 
       <div className="mb-3 flex gap-2">
         <select
           value={sessionId}
           onChange={(e) => loadLedger(e.target.value)}
-          className="flex-1 rounded-lg border border-neutral-300 p-2 text-sm"
+          className="select select-bordered select-sm flex-1"
         >
           <option value="">回を選択…</option>
           {sessions.map((s) => (
@@ -121,50 +120,72 @@ export default function LedgerPage() {
             setCreateError(null);
             setShowNew((v) => !v);
           }}
-          className="shrink-0 rounded-lg border border-neutral-300 px-3 text-sm"
+          className="btn btn-outline btn-sm shrink-0"
         >
           {showNew ? "取消" : "＋新規"}
         </button>
       </div>
 
       {showNew && (
-        <div className="mb-5 flex flex-col gap-2 rounded-xl border border-neutral-200 bg-neutral-50 p-3">
-          <span className="text-sm font-medium">セッションを新規作成</span>
-          <label className="text-sm">
-            <span className="mb-1 block text-neutral-500">日付</span>
-            <input
-              type="date"
-              value={newDate}
-              onChange={(e) => setNewDate(e.target.value)}
-              className="w-full rounded-lg border border-neutral-300 p-2"
-            />
-          </label>
-          <label className="text-sm">
-            <span className="mb-1 block text-neutral-500">活動内容（任意）</span>
-            <input
-              value={newActivity}
-              onChange={(e) => setNewActivity(e.target.value)}
-              placeholder="自由製作 など"
-              className="w-full rounded-lg border border-neutral-300 p-2"
-            />
-          </label>
-          {createError && <p className="text-sm text-red-600">{createError}</p>}
-          <button
-            onClick={createSession}
-            disabled={creating}
-            className="rounded-lg bg-neutral-900 py-2 text-sm font-semibold text-white disabled:opacity-40 dark:bg-white dark:text-black"
-          >
-            {creating ? "作成中…" : "作成"}
-          </button>
+        <div className="card mb-5 border border-base-300 bg-base-200/60 shadow-sm">
+          <div className="card-body gap-3 p-4">
+            <span className="font-semibold">セッションを新規作成</span>
+            <label className="form-control text-sm">
+              <span className="mb-1 block text-base-content/60">日付</span>
+              <input
+                type="date"
+                value={newDate}
+                onChange={(e) => setNewDate(e.target.value)}
+                className="input input-bordered w-full"
+              />
+            </label>
+            <label className="form-control text-sm">
+              <span className="mb-1 block text-base-content/60">活動内容（任意）</span>
+              <input
+                value={newActivity}
+                onChange={(e) => setNewActivity(e.target.value)}
+                placeholder="自由製作 など"
+                className="input input-bordered w-full"
+              />
+            </label>
+            {createError && (
+              <div role="alert" className="alert alert-error py-2 text-sm">
+                <span>{createError}</span>
+              </div>
+            )}
+            <button onClick={createSession} disabled={creating} className="btn btn-primary btn-sm">
+              {creating && <span className="loading loading-spinner loading-xs" />}
+              {creating ? "作成中…" : "作成"}
+            </button>
+          </div>
         </div>
       )}
 
-      {busy && <p className="text-sm text-neutral-500">読み込み中…</p>}
+      {busy && (
+        <div className="flex items-center gap-2 text-sm text-base-content/50">
+          <span className="loading loading-spinner loading-sm" />
+          読み込み中…
+        </div>
+      )}
 
       {ledger && (
         <div className="flex flex-col gap-6">
-          <Section title="収入（材料費）" entries={ledger.income} total={ledger.incomeTotal} extraLabel="会費" extra={ledger.membershipTotal} />
-          <Section title="支出（材料費）" entries={ledger.expense} total={ledger.expenseTotal} />
+          <Section
+            title="収入（材料費）"
+            badge="収入"
+            badgeClass="badge-success"
+            entries={ledger.income}
+            total={ledger.incomeTotal}
+            extraLabel="会費"
+            extra={ledger.membershipTotal}
+          />
+          <Section
+            title="支出（材料費）"
+            badge="支出"
+            badgeClass="badge-error"
+            entries={ledger.expense}
+            total={ledger.expenseTotal}
+          />
         </div>
       )}
     </main>
@@ -173,12 +194,16 @@ export default function LedgerPage() {
 
 function Section({
   title,
+  badge,
+  badgeClass,
   entries,
   total,
   extraLabel,
   extra,
 }: {
   title: string;
+  badge: string;
+  badgeClass: string;
   entries: LedgerEntry[];
   total: number;
   extraLabel?: string;
@@ -186,32 +211,35 @@ function Section({
 }) {
   return (
     <section>
-      <h2 className="mb-2 font-semibold">{title}</h2>
-      <div className="overflow-hidden rounded-xl border border-neutral-200">
-        <table className="w-full text-sm">
+      <h2 className="mb-2 flex items-center gap-2 font-semibold">
+        <span className={`badge ${badgeClass} badge-sm`}>{badge}</span>
+        {title}
+      </h2>
+      <div className="overflow-hidden rounded-box border border-base-300 bg-base-100">
+        <table className="table table-sm">
           <tbody>
             {entries.length === 0 && (
               <tr>
-                <td className="p-3 text-neutral-400" colSpan={2}>
+                <td className="text-base-content/40" colSpan={2}>
                   データなし
                 </td>
               </tr>
             )}
             {entries.map((e) => (
-              <tr key={e.partName} className="border-b border-neutral-100">
-                <td className="p-2">{e.partName}</td>
-                <td className="p-2 text-right tabular-nums">{e.amount.toLocaleString()}</td>
+              <tr key={e.partName}>
+                <td>{e.partName}</td>
+                <td className="text-right tabular-nums">{e.amount.toLocaleString()}</td>
               </tr>
             ))}
             {extra !== undefined && (
-              <tr className="border-b border-neutral-100 text-neutral-500">
-                <td className="p-2">{extraLabel}</td>
-                <td className="p-2 text-right tabular-nums">{extra.toLocaleString()}</td>
+              <tr className="text-base-content/60">
+                <td>{extraLabel}</td>
+                <td className="text-right tabular-nums">{extra.toLocaleString()}</td>
               </tr>
             )}
-            <tr className="bg-neutral-50 font-semibold">
-              <td className="p-2">計</td>
-              <td className="p-2 text-right tabular-nums">{total.toLocaleString()}</td>
+            <tr className="bg-base-200 font-semibold">
+              <td>計</td>
+              <td className="text-right tabular-nums">{total.toLocaleString()}</td>
             </tr>
           </tbody>
         </table>
