@@ -32,6 +32,7 @@ function rawToMemo(raw: unknown): Memo {
   return {
     date: String(r.date ?? ""),
     personName: String(r.person_name ?? ""),
+    managementFee: Number(r.management_fee ?? 0),
     total: Number(r.total ?? 0),
     bbox,
     parts: partsRaw.map((pp) => {

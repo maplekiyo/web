@@ -6,7 +6,7 @@
  * - 'ア'    → record income only (sold from member stock).
  * - 'ひ'    → record in both income and expense (member fronted the cash).
  * - 'other' → any other circled character; treated like 'ひ' (income + expense).
- * - 'none'  → nothing circled; income only.
+ * - 'none'  → nothing circled; treated like 'ひ' (income + expense).
  */
 export type MemoNote = "ア" | "ひ" | "other" | "none";
 
@@ -35,6 +35,7 @@ export interface Memo {
   date: string; // as written, e.g. "4/27"
   personName: string; // may be a nickname
   parts: MemoLine[];
+  managementFee?: number; // 管理費 (added to the 材料費小計 to reach 合計)
   total: number; // 合計 as written on the memo
   bbox?: MemoBBox; // location of this block on the sheet (if detected)
 }

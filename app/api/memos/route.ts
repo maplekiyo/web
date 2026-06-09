@@ -4,6 +4,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import type { MemoLine } from "@/lib/domain/types";
+import { validateMemoAmounts } from "@/lib/domain/validation";
 import { uploadImage } from "@/lib/storage";
 import { supabaseAdmin } from "@/lib/supabase";
 
@@ -13,6 +14,7 @@ interface MemoInput {
   sessionId: string;
   memberId: string;
   declaredTotal: number;
+  managementFee?: number;
   membershipFee?: number;
   ocrRaw?: unknown;
   lines: MemoLine[];
@@ -82,6 +84,26 @@ export async function POST(req: Request) {
         { status: 400 },
       );
     }
+
+    for (const [memoIndex, memo] of memos.entries()) {
+      const validation = validateMemoAmounts(
+        memo.lines,
+        memo.declaredTotal,
+        memo.managementFee ?? 0,
+      );
+      if (!validation.ok) {
+        return NextResponse.json(
+          {
+            error: "金額不一致のため記帳を中断しました。明細と合計を修正してください。",
+            code: "amount_validation_failed",
+            memoIndex,
+            validation,
+          },
+          { status: 422 },
+        );
+      }
+    }
+
     const db = supabaseAdmin();
 
     // Guard against re-registering a form already posted for the same

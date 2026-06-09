@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { deriveLedger } from "./ledger";
 import type { Memo, MemoLine } from "./types";
-import { validateMemo } from "./validation";
+import { validateMemo, validateMemoAmounts } from "./validation";
 
 const line = (over: Partial<MemoLine>): MemoLine => ({
   partName: "x",
@@ -43,6 +43,56 @@ test("validateMemo flags a bad line and bad total", () => {
   assert.equal(v.ok, false);
 });
 
+test("validateMemo accepts 小計＋管理費 = 記載合計", () => {
+  const memo: Memo = {
+    date: "4/27",
+    personName: "x",
+    parts: [line({ partName: "ビーズ", unitPrice: 102, quantity: 1, amount: 102 })],
+    managementFee: 200,
+    total: 302, // 102 (小計) + 200 (管理費)
+  };
+  const v = validateMemo(memo);
+  assert.equal(v.subtotal, 102);
+  assert.equal(v.managementFee, 200);
+  assert.equal(v.computedTotal, 302);
+  assert.equal(v.totalOk, true);
+  assert.equal(v.ok, true);
+});
+
+test("validateMemo flags total when 管理費 does not close the gap", () => {
+  const memo: Memo = {
+    date: "4/27",
+    personName: "x",
+    parts: [line({ partName: "ビーズ", unitPrice: 102, quantity: 1, amount: 102 })],
+    managementFee: 100, // 102 + 100 = 202, not 302
+    total: 302,
+  };
+  const v = validateMemo(memo);
+  assert.equal(v.computedTotal, 202);
+  assert.equal(v.totalOk, false);
+  assert.equal(v.ok, false);
+});
+
+test("validateMemoAmounts includes 管理費 in the total check", () => {
+  const v = validateMemoAmounts(
+    [line({ partName: "ビーズ", unitPrice: 102, quantity: 1, amount: 102 })],
+    302,
+    200,
+  );
+  assert.equal(v.totalOk, true);
+  assert.equal(v.ok, true);
+});
+
+test("validateMemoAmounts validates posted API payload amounts", () => {
+  const v = validateMemoAmounts(
+    [line({ partName: "金具", unitPrice: 40, quantity: 2, amount: 70 })],
+    70,
+  );
+  assert.equal(v.ok, false);
+  assert.equal(v.lines[0].expectedAmount, 80);
+  assert.equal(v.totalOk, true);
+});
+
 test("deriveLedger routes ア to income only, others to both", () => {
   const lines: MemoLine[] = [
     line({ partName: "ビーズ", amount: 319, note: "ア" }), // income only
@@ -59,6 +109,11 @@ test("deriveLedger routes ア to income only, others to both", () => {
   // ア excluded from expense
   assert.deepEqual(l.expense.map((e) => e.partName).sort(), ["ネコカボション", "糸代"]);
   assert.equal(l.expenseTotal, 65 + 61);
+});
+
+test("deriveLedger routes no circled note to expense", () => {
+  const l = deriveLedger([line({ partName: "糸代", amount: 61, note: "none" })]);
+  assert.deepEqual(l.expense, [{ partName: "糸代", amount: 61 }]);
 });
 
 test("deriveLedger sums duplicate part names (existing-amount rule)", () => {

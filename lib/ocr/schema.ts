@@ -39,6 +39,11 @@ const MEMO_BLOCK_SCHEMA = {
         required: ["name", "unit_price", "quantity", "amount", "note"],
       },
     },
+    management_fee: {
+      type: "number",
+      description:
+        "管理費 exactly as written in this block (材料費小計に加算される). 記載が無ければ 0.",
+    },
     total: {
       type: "number",
       description: "合計 exactly as written in this block (do NOT recompute).",
@@ -56,7 +61,7 @@ const MEMO_BLOCK_SCHEMA = {
       required: ["x", "y", "width", "height"],
     },
   },
-  required: ["date", "person_name", "parts", "total", "bbox"],
+  required: ["date", "person_name", "parts", "management_fee", "total", "bbox"],
 };
 
 /** Tool the model must call to return every filled-in memo block on the sheet. */
@@ -87,7 +92,8 @@ export const OCR_SYSTEM_PROMPT = `あなたはAtelierM（手芸サークル）�
 - 氏名（購入者。ニックネームの場合あり）
 - 各パーツ: パーツ名 / 単価 / 数量 / 金額
 - 備考: 丸で囲まれた文字。「ア」「ひ」が丸囲みなら note にそれを、他の文字が丸囲みなら 'other'、丸囲みが無ければ 'none'。
-- 合計（メモに記載された各人の合計金額）
+- 管理費（材料費小計に加算される費用。記載が無ければ 0）
+- 合計（メモに記載された各人の合計金額。通常は 材料費小計 ＋ 管理費）
 - bbox: その枠が画像内のどこにあるか。画像全体の幅・高さに対する割合(0〜1)で x（左端）・y（上端）・width（幅）・height（高さ）を返す。枠の見出しから合計欄まで全体を囲むこと。
 
 重要なルール:

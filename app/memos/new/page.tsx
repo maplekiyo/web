@@ -22,7 +22,6 @@ interface Entry {
   memo: Memo;
   memberId: string;
   sessionId: string;
-  override: boolean;
   posted: boolean; // 登録済みかどうか
   posting: boolean; // 登録処理中
   postError: string | null;
@@ -94,7 +93,6 @@ export default function NewMemoPage() {
             memo,
             memberId: mm?.id ?? "",
             sessionId: ms?.id ?? "",
-            override: false,
             posted: false,
             posting: false,
             postError: null,
@@ -142,7 +140,7 @@ export default function NewMemoPage() {
     const entry = entries[i];
     if (entry.posted || entry.posting) return;
     const validation = validations[i];
-    if (!entry.memberId || !entry.sessionId || (!validation.ok && !entry.override)) return;
+    if (!entry.memberId || !entry.sessionId || !validation.ok) return;
 
     patchEntry(i, { posting: true, postError: null });
     try {
@@ -158,6 +156,7 @@ export default function NewMemoPage() {
               sessionId: entry.sessionId,
               memberId: entry.memberId,
               declaredTotal: entry.memo.total,
+              managementFee: entry.memo.managementFee ?? 0,
               ocrRaw: entry.memo,
               lines: entry.memo.parts,
             },
@@ -366,7 +365,7 @@ function EntryCard({
   const { memo, posted } = entry;
   const locked = posted; // 登録済みは編集・再登録不可
   const lineMismatches = validation.lines.filter((l) => !l.ok);
-  const canPost = !!entry.memberId && !!entry.sessionId && (validation.ok || entry.override);
+  const canPost = !!entry.memberId && !!entry.sessionId && validation.ok;
 
   return (
     <div
@@ -509,20 +508,35 @@ function EntryCard({
               </table>
             </div>
 
-            <div className="flex items-center justify-between text-sm">
-              <label className="flex items-center gap-2 text-base-content/60">
-                合計
-                <input
-                  type="number"
-                  value={memo.total}
-                  disabled={locked}
-                  onChange={(e) => onPatchMemo({ total: Number(e.target.value) })}
-                  className="input input-xs input-bordered w-24"
-                />
-              </label>
-              <span className={validation.totalOk ? "text-success" : "text-error"}>
-                明細合計 {yen(validation.computedTotal)} {validation.totalOk ? "✅" : "❌"}
-              </span>
+            <div className="flex flex-col gap-2 text-sm">
+              <div className="flex items-center justify-between">
+                <label className="flex items-center gap-2 text-base-content/60">
+                  管理費
+                  <input
+                    type="number"
+                    value={memo.managementFee ?? 0}
+                    disabled={locked}
+                    onChange={(e) => onPatchMemo({ managementFee: Number(e.target.value) })}
+                    className="input input-xs input-bordered w-24"
+                  />
+                </label>
+                <span className="text-base-content/60">小計 {yen(validation.subtotal)}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <label className="flex items-center gap-2 text-base-content/60">
+                  合計
+                  <input
+                    type="number"
+                    value={memo.total}
+                    disabled={locked}
+                    onChange={(e) => onPatchMemo({ total: Number(e.target.value) })}
+                    className="input input-xs input-bordered w-24"
+                  />
+                </label>
+                <span className={validation.totalOk ? "text-success" : "text-error"}>
+                  小計＋管理費 {yen(validation.computedTotal)} {validation.totalOk ? "✅" : "❌"}
+                </span>
+              </div>
             </div>
 
             {/* 金額不一致の詳細：どの行が・いくら違うのかを具体的に表示 */}
@@ -540,26 +554,15 @@ function EntryCard({
                     ))}
                     {!validation.totalOk && (
                       <li>
-                        合計：明細の合計 {yen(validation.computedTotal)} に対し、記載合計は{" "}
-                        {yen(validation.declaredTotal)}（差{" "}
+                        合計：小計 {yen(validation.subtotal)} ＋ 管理費{" "}
+                        {yen(validation.managementFee)} = {yen(validation.computedTotal)} に対し、
+                        記載合計は {yen(validation.declaredTotal)}（差{" "}
                         {yen(validation.declaredTotal - validation.computedTotal)}）
                       </li>
                     )}
                   </ul>
                 </div>
               </div>
-            )}
-
-            {!validation.ok && !posted && (
-              <label className="flex cursor-pointer items-center gap-2 rounded-box bg-warning/15 p-3 text-sm text-warning-content">
-                <input
-                  type="checkbox"
-                  checked={entry.override}
-                  onChange={(e) => onPatchEntry({ override: e.target.checked })}
-                  className="checkbox checkbox-sm checkbox-warning"
-                />
-                金額が不一致ですが、確認のうえ記帳する
-              </label>
             )}
 
             {entry.postError && (

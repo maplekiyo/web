@@ -1,5 +1,5 @@
 // Amount validation — the "halt on mismatch" discipline from the spec.
-// Step 1: 単価 × 数量 = 金額 for each line, and Σ金額 = 記載合計.
+// Step 1: 単価 × 数量 = 金額 for each line, and 材料費小計 + 管理費 = 記載合計.
 
 import type { Memo } from "./types";
 
@@ -16,7 +16,9 @@ export interface LineValidation {
 export interface MemoValidation {
   lines: LineValidation[];
   declaredTotal: number; // 合計 as written
-  computedTotal: number; // Σ of line amounts
+  subtotal: number; // 材料費小計 = Σ of line amounts
+  managementFee: number; // 管理費
+  computedTotal: number; // 小計 + 管理費 (what the 記載合計 should equal)
   totalOk: boolean;
   ok: boolean; // every line ok AND total ok
 }
@@ -35,15 +37,34 @@ export function validateMemo(memo: Memo): MemoValidation {
     };
   });
 
-  const computedTotal = memo.parts.reduce((sum, p) => sum + p.amount, 0);
+  const subtotal = memo.parts.reduce((sum, p) => sum + p.amount, 0);
+  const managementFee = memo.managementFee ?? 0;
+  const computedTotal = subtotal + managementFee;
   const totalOk = computedTotal === memo.total;
   const ok = totalOk && lines.every((l) => l.ok);
 
   return {
     lines,
     declaredTotal: memo.total,
+    subtotal,
+    managementFee,
     computedTotal,
     totalOk,
     ok,
   };
+}
+
+/** Validate the posted amount fields without requiring OCR-only memo metadata. */
+export function validateMemoAmounts(
+  parts: Memo["parts"],
+  declaredTotal: number,
+  managementFee = 0,
+): MemoValidation {
+  return validateMemo({
+    date: "",
+    personName: "",
+    parts,
+    managementFee,
+    total: declaredTotal,
+  });
 }
